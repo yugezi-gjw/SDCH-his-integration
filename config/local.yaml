@@ -1,0 +1,58 @@
+server:
+  type: default
+  applicationConnectors:
+    - type: http
+      port: 8900
+  adminConnectors:
+    - type: http
+      port: 8901
+  requestLog:
+      type: classic
+      appenders:
+         - type: file
+           currentLogFilename: log/request.log
+           threshold: INFO
+           archive: true
+           maxFileSize: 50000K
+           archivedFileCount: 20
+           archivedLogFilenamePattern: log/request-%d-%i.log
+logging:
+  level: INFO
+  appenders:
+    - type: console
+      threshold: INFO
+    - type: file
+      currentLogFilename: log/service.log
+      threshold: INFO
+      archive: true
+      maxFileSize: 50000K
+      archivedLogFilenamePattern: log/service-%d-%i.log
+      archivedFileCount: 10
+      logFormat: " {%n
+                      \"logger\":\"%logger\",%n
+                      \"timestamp\":\"%d{HH:mm:ss.SSS}\",%n
+                      \"level\":\"%level\",%n
+                      \"thread\":\"%thread\",%n
+                      \"message\":\"%msg\",%n
+                      \"throwable\":\"%throwable\"%n
+                    },%n"
+database:
+    driver: oracle.jdbc.driver.OracleDriver
+    databaseServer: 10.120.120.139
+    port: 1521
+    database: orcl
+    username: shuxue
+    password: shuxue
+    maxTotal: 100
+    initialSize: 20
+    maxIdle: 20
+    minIdle: 10
+    maxWaitMillis: 5000
+    timeBetweenEvictionRunsMillis: 603000
+    minEvictableIdleTimeMillis:  1800000
+hisPatientViewName: sx_patientinfo
+hisPatientViewKey: SUBSTR(HOSPITALIZED_NO, 5)
+hisPaymentViewName: XXX
+hisPaymentViewKey: XXX
+hisPatientOrderViewName: HIS_SDZL.sx_patientinfo_order
+dummy: false
