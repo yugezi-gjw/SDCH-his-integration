@@ -28,11 +28,12 @@ public class HISIntegrationResource extends AbstractResource{
 
     @GET
     @Path("/patient")
-    public Response queryPatientInfoFromHis(@QueryParam("type") String type, @QueryParam("zyId") String zyId){
+    public Response queryPatientInfoFromHis(@QueryParam("type") String type, @QueryParam("patientid") String zyId){
         log.info("Query HIS patient by ZYID: [{}]", zyId);
         RegistrationVO vo = queryPatientInterface.queryPatientByZyId(zyId);
         return Response.ok(vo,MediaType.APPLICATION_JSON_TYPE.withCharset("utf-8")).build();
     }
+
     @GET
     @Path("/payment")
     public Response queryPaymentFromHis(@QueryParam("id") String id){
